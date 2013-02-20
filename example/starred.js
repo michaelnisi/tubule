@@ -1,13 +1,15 @@
 
 // starred - download all images from starred Google Reader items
 
-var boros = require('../index.js')
+var boros = require('../')
   , request = require('request')
-  , imgscraper = require('scrimg')
+  , scrimg = require('scrimg')
   , trumpet = require('trumpet')
   , request = require('request')
   , fs = require('fs')
-  , img = imgscraper()
+  , cop = require('cop')
+  , urls = scrimg()
+  , filterURL = require('./filterURL')
   , next = null
   
 var max = 1
@@ -19,10 +21,11 @@ fs.mkdirSync(dir, 0700)
 
 function download (uri) {
   request(uri)
-    .pipe(img)
+    .pipe(urls)
       .on('end', function (more) {
         next = more
       })
+    .pipe(cop(filterURL))
     .pipe(boros(dir))
       .on('data', function (chunk) {
         console.log('file %s', chunk)
