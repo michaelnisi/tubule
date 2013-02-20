@@ -1,0 +1,23 @@
+{
+  "name": "boros",
+  "version": "0.0.0",
+  "description": "download files",
+  "main": "index.js",
+  "directories": {
+    "example": "example",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "tap test/*.js"
+  },
+  "repository": "",
+  "keywords": [
+    "stream",
+    "download",
+    "files"
+  ],
+  "author": "Michael Nisi",
+  "license": "MIT",
+  "readmeFilename": "README",
+  "gitHead": "b25c8a9af7bbe4268306d3dcaa6f051bd2afe05d"
+}
