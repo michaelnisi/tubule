@@ -5,6 +5,7 @@ var request = require('request')
   , Stream = require('stream').Stream
   , path = require('path')
   , fs = require('fs')
+  , filterURL = require('./lib/filterURL.js')
 
 module.exports = function (dir) {
   var stream = new Stream()
@@ -24,7 +25,10 @@ module.exports = function (dir) {
   stream.write = function (img) {
     var name = path.basename(img)
       , target = path.join(dir, name)
-    
+  
+    img = filterURL(img)
+    if (!img) return true
+
     buffer.push(img)
 
     request(img)

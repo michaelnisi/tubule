@@ -2,8 +2,6 @@
 // starred - download all images from starred Google Reader items
 
 var boros = require('../index.js')
-  , filterURLs = require('../lib/filterURLs.js')
-  , cop = require('cop')
   , request = require('request')
   , imgscraper = require('scrimg')
   , trumpet = require('trumpet')
@@ -24,7 +22,6 @@ function download (uri) {
       .on('end', function (more) {
         next = more
       })
-    .pipe(cop(filterURLs))
     .pipe(boros(dir))
       .on('data', function (chunk) {
         console.log('file %s', chunk)
