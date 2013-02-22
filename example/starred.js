@@ -3,12 +3,12 @@
 
 var boros = require('../')
   , request = require('request')
-  , scrimg = require('scrimg')
+  , lust = require('lust')
   , trumpet = require('trumpet')
   , request = require('request')
   , fs = require('fs')
   , cop = require('cop')
-  , urls = scrimg()
+  , urls = lust()
   , filterURL = require('./filterURL')
   , next = null
   

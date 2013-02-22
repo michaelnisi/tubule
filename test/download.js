@@ -1,9 +1,10 @@
 
-// boros - test boros
+// download - test downloading
 
 var test = require('tap').test
   , request = require('request')
   , http = require('http')
+  , path = require('path')
   , st = require('st')
   , es = require('event-stream')
   , rimraf = require('rimraf')
@@ -11,7 +12,7 @@ var test = require('tap').test
   , url = require('url')
   , mount = st('.')
   , port = '1337'
-  , boros = require('../')
+  , tubule = require('../')
   , dir = '/tmp/boros-' + Math.floor(Math.random() * (1<<24))
 
 test('setup', function (t) {
@@ -27,15 +28,32 @@ test('setup', function (t) {
 })
 
 test('begin', function (t) {
-  var urls = [
-    'http://localhost:1337/nodejs-1024x768.png'
+  var urls = []
+    , expected = []
+  
+  var filenames = [
+    'nodejs-1024x768.png'
+  , '800px-Joyent-logo.png'
+  , 'npm-logo.png'
   ]
 
+  filenames.forEach(function (filename) {
+    urls.push('http://localhost:1337/' + filename)
+    expected.push(path.join(dir, filename)) 
+  })
+
   es.readArray(urls)
-    .pipe(boros(dir))
+    .pipe(tubule(dir))
     .pipe(es.writeArray(function (err, paths) {
       t.equal(paths.length, urls.length)
-      t.end()     
+      expected.forEach(function (a) {
+        t.ok(fs.statSync(a).isFile(), 'should be downloaded')
+        t.ok(paths.some(function (b) {
+          return a === b
+        }), 'should contain expected path')
+      })
+      
+      t.end()
     }))
 })
 
@@ -46,6 +64,6 @@ test('teardown', function (t) {
       t.end()
     })
   })
-  
+
   process.exit()
 })

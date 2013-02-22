@@ -1,6 +1,4 @@
 
-// filterURL - filter URL
-
 var path = require('path')
 
 module.exports = function (url) {
