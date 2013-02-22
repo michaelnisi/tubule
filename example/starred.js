@@ -27,7 +27,6 @@ function download (uri) {
       })
     .pipe(cop(filterURL))
     .pipe(boros(dir))
-      .on('data', function (chunk) {
         console.log('file %s', chunk)
       })
       .on('end', function () {
