@@ -13,7 +13,7 @@ var test = require('tap').test
   , mount = st('.')
   , port = '1337'
   , tubule = require('../')
-  , dir = '/tmp/boros-' + Math.floor(Math.random() * (1<<24))
+  , dir = '/tmp/tubule-' + Math.floor(Math.random() * (1<<24))
 
 test('setup', function (t) {
   http.createServer(function (q, s) {
@@ -27,7 +27,7 @@ test('setup', function (t) {
   t.end()
 })
 
-test('begin', function (t) {
+test('optimum', function (t) {
   var urls = []
     , expected = []
   

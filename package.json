@@ -1,23 +1,40 @@
 {
   "name": "tubule",
   "version": "0.0.0",
-  "description": "download files",
+  "description": "download files from a stream of URLs",
   "main": "index.js",
   "directories": {
     "example": "example",
     "test": "test"
   },
+  "dependencies": {
+    "event-stream": "3.0.x",
+    "mkdirp": "0.3.x",
+    "request": "2.14.x"
+  },
+  "devDependencies": {
+    "tap": "0.4.x",
+    "cop": "0.2.x",
+    "rimraf": "2.1.x",
+    "st": "0.1.x"
+  },
   "scripts": {
     "test": "tap test/*.js"
   },
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
   "keywords": [
+    "through",
     "stream",
     "download",
     "files"
   ],
-  "author": "Michael Nisi",
-  "license": "MIT",
-  "readmeFilename": "README",
-  "gitHead": "b25c8a9af7bbe4268306d3dcaa6f051bd2afe05d"
+  "author": {
+    "name": "Michael Nisi",
+    "email": "michael.nisi@gmail.com",
+    "url": "http://michaelnisi.com"
+  },
+  "license": "MIT/X11"
 }
