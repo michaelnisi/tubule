@@ -1,6 +1,6 @@
 {
   "name": "tubule",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "download files from a stream of URLs",
   "main": "index.js",
   "directories": {
@@ -36,5 +36,5 @@
     "email": "michael.nisi@gmail.com",
     "url": "http://michaelnisi.com"
   },
-  "license": "MIT/X11"
+  "license": "MIT"
 }

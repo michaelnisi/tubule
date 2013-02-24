@@ -1,5 +1,5 @@
 
-// tubule - download files
+// tubule - get files
 
 var request = require('request')
   , path = require('path')

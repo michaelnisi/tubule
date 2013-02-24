@@ -1,4 +1,4 @@
-# tubule - download files
+# tubule - get files
 
 [![Build Status](https://secure.travis-ci.org/michaelnisi/tubule.png?branch=master)](https://travis-ci.org/michaelnisi/tubule)
 

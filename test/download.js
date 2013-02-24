@@ -27,28 +27,32 @@ function writeFiles (files) {
   if (files.length) writeFiles(files)
 }
 
-function files (names, datas) {
+function files (names, data) {
   var files = []
-    , data = null
-  
+    , datum = null
+
   names.forEach(function (name, index) {
-    data = datas[index]
-    files.push({ name:name, data:data })
+    datum = data[index]
+    files.push({ name:name, data:datum })
   })
 
   return files
 }
 
 test('setup', function (t) {
-  mkdirs([dir, source, target])  
-  
+  mkdirs([dir, source, target])
+
   var filenames = [
     path.join(source, 'a.js')
   , path.join(source, 'b.js')
   , path.join(source, 'c.js')
   ]
 
-  writeFiles(files(filenames, ['A', 'B', 'C']))
+  writeFiles(files(filenames, [
+    'console.log("A loves you!")'
+  , 'console.log("B loves you!")'
+  , 'console.log("C loves you!")'
+  ]))
 
   filenames.forEach(function (filename) {
     fs.stat(filename, function (err) {
@@ -57,7 +61,7 @@ test('setup', function (t) {
   })
 
   var mount = st(source)
-  
+
   http.createServer(function (q, s) {
     if (mount(q, s)) return
     s.statusCode = 404
@@ -70,7 +74,7 @@ test('setup', function (t) {
 test('optimum', function (t) {
   var urls = []
     , expected = []
-  
+
   var filenames = [
     'a.js'
   , 'b.js'
@@ -79,7 +83,7 @@ test('optimum', function (t) {
 
   filenames.forEach(function (filename) {
     urls.push('http://localhost:1337/' + filename)
-    expected.push(path.join(target, filename)) 
+    expected.push(path.join(target, filename))
   })
 
   es.readArray(urls)
@@ -92,7 +96,7 @@ test('optimum', function (t) {
           return a === b
         }), 'should contain expected path')
       })
-      
+
       t.end()
     }))
 })
