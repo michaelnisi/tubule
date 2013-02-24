@@ -1,7 +1,7 @@
 {
   "name": "tubule",
-  "version": "0.0.1",
-  "description": "download files from a stream of URLs",
+  "version": "0.0.2",
+  "description": "get files identified by a stream of URLs",
   "main": "index.js",
   "directories": {
     "example": "example",
@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git://github.com/michaelnisi/tubule.git"
   },
   "keywords": [
     "through",
