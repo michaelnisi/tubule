@@ -5,7 +5,7 @@ var tubule = require('../')
   , es = require('event-stream')
   , cop = require('cop')
   , path = require('path')
-  , dir = process.argv.splice(2)[0] || __dirname
+  , dir = '/tmp/tubule-' + Math.floor(Math.random() * (1<<24))
 
 var urls = [
   'https://npmjs.org/static/npm.png'

@@ -10,20 +10,60 @@ var test = require('tap').test
   , rimraf = require('rimraf')
   , fs = require('fs')
   , url = require('url')
-  , mount = st('.')
   , port = '1337'
   , tubule = require('../')
   , dir = '/tmp/tubule-' + Math.floor(Math.random() * (1<<24))
+  , source = path.join(dir, 'source')
+  , target = path.join(dir, 'target')
+
+function mkdirs (dirs) {
+  fs.mkdirSync(dirs.shift())
+  if (dirs.length) mkdirs(dirs)
+}
+
+function writeFiles (files) {
+  var file = files.shift()
+  fs.writeFileSync(file.name, file.data)
+  if (files.length) writeFiles(files)
+}
+
+function files (names, datas) {
+  var files = []
+    , data = null
+  
+  names.forEach(function (name, index) {
+    data = datas[index]
+    files.push({ name:name, data:data })
+  })
+
+  return files
+}
 
 test('setup', function (t) {
+  mkdirs([dir, source, target])  
+  
+  var filenames = [
+    path.join(source, 'a.js')
+  , path.join(source, 'b.js')
+  , path.join(source, 'c.js')
+  ]
+
+  writeFiles(files(filenames, ['A', 'B', 'C']))
+
+  filenames.forEach(function (filename) {
+    fs.stat(filename, function (err) {
+      t.ok(!err, 'should be written')
+    })
+  })
+
+  var mount = st(source)
+  
   http.createServer(function (q, s) {
     if (mount(q, s)) return
     s.statusCode = 404
     s.end('not found')
   }).listen(port)
 
-  fs.mkdirSync(dir, 0700)
-  process.chdir(dir)
   t.end()
 })
 
@@ -32,18 +72,18 @@ test('optimum', function (t) {
     , expected = []
   
   var filenames = [
-    'nodejs-1024x768.png'
-  , '800px-Joyent-logo.png'
-  , 'npm-logo.png'
+    'a.js'
+  , 'b.js'
+  , 'c.js'
   ]
 
   filenames.forEach(function (filename) {
     urls.push('http://localhost:1337/' + filename)
-    expected.push(path.join(dir, filename)) 
+    expected.push(path.join(target, filename)) 
   })
 
   es.readArray(urls)
-    .pipe(tubule(dir))
+    .pipe(tubule(target))
     .pipe(es.writeArray(function (err, paths) {
       t.equal(paths.length, urls.length)
       expected.forEach(function (a) {
