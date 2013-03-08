@@ -4,7 +4,7 @@
 
 ## Description
 
-A [through](https://github.com/dominictarr/through) stream that copies files from URLs written to it, while it emits target filenames (of completed downloads).
+A [through](https://github.com/dominictarr/through) stream that copies files from URIs written to it, while it emits target filenames (of completed downloads).
 
 ## Usage
 
@@ -31,4 +31,4 @@ Install with [npm](https://npmjs.org):
 
 ## License
 
-[MIT License](https://raw.github.com/michaelnisi/gitpull/master/LICENSE)
+[MIT License](https://raw.github.com/michaelnisi/tubule/master/LICENSE)

@@ -1,6 +1,6 @@
 {
   "name": "tubule",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "write files from a stream of URIs",
   "main": "index.js",
   "directories": {
