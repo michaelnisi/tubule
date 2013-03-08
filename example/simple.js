@@ -1,10 +1,6 @@
-
-// simple - example
-
 var tubule = require('../')
   , es = require('event-stream')
   , cop = require('cop')
-  , path = require('path')
   , dir = '/tmp/tubule-' + Math.floor(Math.random() * (1<<24))
 
 var urls = [

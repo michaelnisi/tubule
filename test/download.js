@@ -1,6 +1,3 @@
-
-// download - test downloading
-
 var test = require('tap').test
   , request = require('request')
   , http = require('http')

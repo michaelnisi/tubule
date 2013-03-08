@@ -1,17 +1,16 @@
-# tubule - get files
+# tubule - write files from a stream of URIs
 
 [![Build Status](https://secure.travis-ci.org/michaelnisi/tubule.png?branch=master)](https://travis-ci.org/michaelnisi/tubule)
 
 ## Description
 
-The tubule Node module is a through stream that copies files from URLs written to it, while it emits target filenames (of completed downloads).
+A [through](https://github.com/dominictarr/through) stream that copies files from URLs written to it, while it emits target filenames (of completed downloads).
 
 ## Usage
 
     var tubule = require('tubule')
       , es = require('event-stream')
       , cop = require('cop')
-      , path = require('path')
       , dir = process.argv.splice(2)[0] || __dirname
 
     var urls = [
@@ -26,7 +25,7 @@ The tubule Node module is a through stream that copies files from URLs written t
 
 ## Installation
 
-Install with [npm](http://npmjs.org/):
+Install with [npm](https://npmjs.org):
 
     npm install tubule
 

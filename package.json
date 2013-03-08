@@ -1,7 +1,7 @@
 {
   "name": "tubule",
-  "version": "0.0.2",
-  "description": "get files identified by a stream of URLs",
+  "version": "0.0.3",
+  "description": "write files from a stream of URIs",
   "main": "index.js",
   "directories": {
     "example": "example",

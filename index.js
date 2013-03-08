@@ -1,6 +1,3 @@
-
-// tubule - get files
-
 var request = require('request')
   , path = require('path')
   , fs = require('fs')
