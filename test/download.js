@@ -1,9 +1,9 @@
 var test = require('tap').test
-  , request = require('request')
+  , Readable = require('stream').Readable
+  , Writable = require('stream').Writable
   , http = require('http')
   , path = require('path')
   , st = require('st')
-  , es = require('event-stream')
   , rimraf = require('rimraf')
   , fs = require('fs')
   , url = require('url')
@@ -71,6 +71,8 @@ test('setup', function (t) {
 test('optimum', function (t) {
   var urls = []
     , expected = []
+    , actual = []
+
 
   var filenames = [
     'a.js'
@@ -83,19 +85,32 @@ test('optimum', function (t) {
     expected.push(path.join(target, filename))
   })
 
-  es.readArray(urls)
+  var reader = new Readable()
+    , writer = new Writable()
+
+  reader._read = function () {
+    reader.push(urls.shift())
+  }
+
+  writer._write = function (chunk, enc, cb) {
+    actual.push(chunk.toString())
+    cb()
+  }
+
+  reader
     .pipe(tubule(target))
-    .pipe(es.writeArray(function (err, paths) {
-      t.equal(paths.length, urls.length)
+    .pipe(writer)
+    .on('finish', function () {
+      t.equal(actual.length, 3)
       expected.forEach(function (a) {
         t.ok(fs.statSync(a).isFile(), 'should be downloaded')
-        t.ok(paths.some(function (b) {
+        t.ok(actual.some(function (b) {
           return a === b
         }), 'should contain expected path')
       })
 
       t.end()
-    }))
+    })
 })
 
 test('teardown', function (t) {

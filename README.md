@@ -1,4 +1,4 @@
-# tubule - write all files in stream of URIs
+# tubule - copy files from URI stream
 
 The tubule [Node.js](http://nodejs.org/) module is a [Transform](http://nodejs.org/api/stream.html#stream_class_stream_transform) stream that writes files from URIs written to it, while it emits target filenames (of completed downloads).
 

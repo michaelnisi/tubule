@@ -1,7 +1,7 @@
 {
   "name": "tubule",
-  "version": "0.1.0",
-  "description": "write files from a stream of URIs",
+  "version": "0.1.1",
+  "description": "copy files from URI stream",
   "main": "index.js",
   "directories": {
     "example": "example",
