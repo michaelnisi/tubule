@@ -1,22 +1,24 @@
 {
   "name": "tubule",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "write files from a stream of URIs",
   "main": "index.js",
   "directories": {
     "example": "example",
     "test": "test"
   },
+  "engines": {
+    "node": "0.10.x"
+  },
   "dependencies": {
-    "event-stream": "3.0.x",
-    "mkdirp": "0.3.x",
-    "request": "2.14.x"
+    "mkdirp": "0.3.x"
   },
   "devDependencies": {
     "tap": "0.4.x",
     "cop": "0.2.x",
     "rimraf": "2.1.x",
-    "st": "0.1.x"
+    "st": "0.1.x",
+    "scrim":"0.1.x"
   },
   "scripts": {
     "test": "tap test/*.js"
@@ -26,10 +28,8 @@
     "url": "git://github.com/michaelnisi/tubule.git"
   },
   "keywords": [
-    "through",
-    "stream",
-    "download",
-    "files"
+    "copy",
+    "stream"
   ],
   "author": {
     "name": "Michael Nisi",

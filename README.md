@@ -1,27 +1,37 @@
-# tubule - write files from a stream of URIs
+# tubule - write all files in stream of URIs
+
+The tubule [Node.js](http://nodejs.org/) module is a [Transform](http://nodejs.org/api/stream.html#stream_class_stream_transform) stream that writes files from URIs written to it, while it emits target filenames (of completed downloads).
 
 [![Build Status](https://secure.travis-ci.org/michaelnisi/tubule.png?branch=master)](https://travis-ci.org/michaelnisi/tubule)
 
-## Description
-
-A [through](https://github.com/dominictarr/through) stream that copies files from URIs written to it, while it emits target filenames (of completed downloads).
-
 ## Usage
 
-    var tubule = require('tubule')
-      , es = require('event-stream')
+To download all images from [nodejs.org](http://nodejs.org'):
+    
+    var http = require('http')
+      , tubule = require('tubule')
       , cop = require('cop')
-      , dir = process.argv.splice(2)[0] || __dirname
+      , scrim = require('scrim')
+      , dir = '/tmp/tubule-' + Math.floor(Math.random() * (1<<24))
 
-    var urls = [
-      'https://npmjs.org/static/npm.png'
-    , 'http://nodejs.org/images/logos/nodejs-1024x768.png'
-    ]
+    http.get('http://www.nodejs.org', function (res) {
+      res
+        .pipe(scrim())
+        .on('error', console.error)
+        .pipe(cop(abs))
+        .pipe(tubule(dir))
+        .on('error', console.error)
+        .pipe(cop(function (uri) { return uri + '\n' }))
+        .pipe(process.stdout)
+    })
+    
+    function abs (uri) {
+      return uri.toString().substr(0,4) === 'http' ? uri : null
+    }
 
-    es.readArray(urls)
-      .pipe(tubule(dir))
-      .pipe(cop(function (filename) { return filename + '\n' }))
-      .pipe(process.stdout)
+### tubule()
+
+The `tubule` module exports a single function that returns a [Transform](http://nodejs.org/api/stream.html#stream_class_stream_transform) stream.
 
 ## Installation
 
