@@ -22,10 +22,8 @@ module.exports = function (dir) {
     var uri = chunk.toString()
       , name = path.basename(uri)
       , target = path.join(dir, name)
-      , u = url.parse(uri)
-      , iface = u.protocol === 'https:' ? https : http;
 
-    iface.get(uri, function (res) {
+    get(uri, function (res) {
         res
           .on('error', function (err) {
             stream.emit('error', err)
@@ -43,4 +41,9 @@ module.exports = function (dir) {
   }
 
   return stream
+}
+
+function get(uri, cb) {
+  var iface = url.parse(uri) === 'https:' ? https : http
+  iface.get(uri, cb)
 }
