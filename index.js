@@ -45,5 +45,5 @@ module.exports = function (dir) {
 }
 
 function iface(uri) {
-  return url.parse(uri) === 'https:' ? https : http
+  return url.parse(uri).protocol === 'https:' ? https : http
 }
