@@ -6,7 +6,7 @@ The tubule [Node.js](http://nodejs.org/) module is a [Transform](http://nodejs.o
 
 ## Usage
 
-To download all images from [nodejs.org](http://nodejs.org'):
+To download all images from [nodejs.org](http://nodejs.org):
     
     var http = require('http')
       , tubule = require('tubule')
