@@ -1,6 +1,6 @@
 {
   "name": "tubule",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "copy files from URI stream",
   "main": "index.js",
   "directories": {
@@ -29,6 +29,7 @@
   },
   "keywords": [
     "copy",
+    "files",
     "stream"
   ],
   "author": {

@@ -4,6 +4,8 @@
 var path = require('path')
   , fs = require('fs')
   , http = require('http')
+  , https = require('https')
+  , url = require('url')
   , Transform = require('stream').Transform
   , mkdirp = require('mkdirp')
 
@@ -17,11 +19,13 @@ module.exports = function (dir) {
         return
       }
 
-      var uri = chunk.toString()
-        , name = path.basename(uri)
-        , target = path.join(dir, name)
+    var uri = chunk.toString()
+      , name = path.basename(uri)
+      , target = path.join(dir, name)
+      , u = url.parse(uri)
+      , iface = u.protocol === 'https:' ? https : http;
 
-      http.get(uri, function (res) {
+    iface.get(uri, function (res) {
         res
           .on('error', function (err) {
             stream.emit('error', err)
