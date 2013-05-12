@@ -1,6 +1,6 @@
 # tubule - copy files from URI stream
 
-The tubule [Node.js](http://nodejs.org/) module is a [Transform](http://nodejs.org/api/stream.html#stream_class_stream_transform) stream that uses http or https to get files from URIs written to it. While the files are copied to a local directory `tubule` emits the paths of the completed downloads.
+The tubule [Node.js](http://nodejs.org/) module is a [Transform](http://nodejs.org/api/stream.html#stream_class_stream_transform) stream that uses http or https to get files from URIs written to it. As the files are copied to a local directory, `tubule` emits the paths of the completed downloads.
 
 [![Build Status](https://secure.travis-ci.org/michaelnisi/tubule.png?branch=master)](https://travis-ci.org/michaelnisi/tubule)
 
